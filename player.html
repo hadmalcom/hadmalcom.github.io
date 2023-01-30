@@ -54,7 +54,7 @@
     
   </div>
   <div class="container w-100 d-flex justify-content-center"></div>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js" integrity="sha512-R1+Pgd+uyqnjx07LGUmp85iW8MSL1iLR2ICPysFAt8Y4gub8C42B+aNG2ddOfCWcDDn1JPWZO4eby4+291xP9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     function getUrlVars()
     {
@@ -76,12 +76,6 @@
             },
             function(data) {
                 $("#main").html(data);
-                var video = document.getElementById('player');
-                if (Hls.isSupported()) {
-                  var hls = new Hls();
-                  hls.loadSource(videoSrc);
-                  hls.attachMedia(video);
-                }
                 $("#pageloader").hide();
             }
         );
