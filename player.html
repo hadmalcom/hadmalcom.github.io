@@ -84,7 +84,15 @@
             }
         );
     }
-    var player = videojs('player');
+    var player = videojs('player', {
+      html5: {
+        vhs: {
+          overrideNative: true
+        },
+        nativeAudioTracks: false,
+        nativeVideoTracks: false
+      }
+    });
   </script>
 </body>
 
