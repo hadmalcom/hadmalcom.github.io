@@ -70,8 +70,8 @@
             }
             return vars;
      }
-      var video = getUrlVars()["video"];
-      var name = getUrlVars()["tvshow"];
+    var video = getUrlVars()["video"];
+    var name = getUrlVars()["tvshow"];
     function getPlayer(){
       $.post("https://hadmal.com/wp-json/index.php", {
                 page: 'player',
@@ -84,6 +84,7 @@
             }
         );
     }
+    var player = videojs('player');
   </script>
 </body>
 
