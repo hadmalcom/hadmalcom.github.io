@@ -93,7 +93,7 @@
         }
 
         function changeSource(source,subtitle) {
-            $("#video").html(subtitle);
+            $("#video").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
             var video = document.querySelector('#player');
 
             if (Hls.isSupported()) {
