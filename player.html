@@ -2,37 +2,38 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>HADMAL Player</title>
-  <link data-n-head="true" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Montserrat" />
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="shortcut icon" href="res/img/faviconhdml.png" type="image/x-icon" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      padding: 0px;
-      font-family: Fira Sans Condensed, sans-serif;
-    }
-    
-    .pageloader {
-        position: fixed;
-        z-index: 1000;
-        background-color: #ffffff;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-     }
-  </style>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>HADMAL Player</title>
+    <link data-n-head="true" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Montserrat" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="res/img/faviconhdml.png" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0px;
+            font-family: Fira Sans Condensed, sans-serif;
+        }
+
+        .pageloader {
+            position: fixed;
+            z-index: 1000;
+            background-color: #ffffff;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body class="bg-dark" onload="getPlayer()">
-  <div id="pageloader" class="pageloader">
+    <div id="pageloader" class="pageloader">
         <div class="row h-100">
             <div class="col-12 align-self-center">
                 <figure class="logo-landing mb-4 mx-auto">
@@ -47,52 +48,63 @@
             </div>
         </div>
     </div>
-  <div class="row m-0 w-100">
-  </div>
-  <div class="container w-100 d-flex justify-content-center"></div>
-  <div id="main" class="container w-100">
-    
-  </div>
-  <div class="container w-100 d-flex justify-content-center"></div>
-  <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
-  <script>
-    function getUrlVars()
-    {
+    <div class="row m-0 w-100">
+    </div>
+    <div class="container w-100 d-flex justify-content-center"></div>
+    <div id="main" class="container w-100">
+
+    </div>
+    <div class="container w-100 d-flex justify-content-center"></div>
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
+    <script>
+        function getUrlVars() {
             var vars = [], hash;
             var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-            for(var i = 0; i < hashes.length; i++)
-            {
+            for (var i = 0; i < hashes.length; i++) {
                 hash = hashes[i].split('=');
                 vars.push(hash[0]);
                 vars[hash[0]] = hash[1];
             }
             return vars;
-     }
-    var video = getUrlVars()["video"];
-    function getPlayer(){
-      $.post("https://hadmal.com/wp-json/index.php", {
+        }
+        var video = getUrlVars()["video"];
+        function getPlayer() {
+            $.post("https://hadmal.com/wp-json/index.php", {
                 page: 'player',
                 key: video
             },
-            function(data) {
-                $("#main").html(data.main);
-                (function () {
-                  var video = document.querySelector('#player');
+                function (data) {
+                    $("#main").html(data.main);
+                    (function () {
+                        var video = document.querySelector('#player');
 
-                  if (Hls.isSupported()) {
-                    var hls = new Hls();
-                    hls.loadSource(data.source);
-                    hls.attachMedia(video);
-                    hls.on(Hls.Events.MANIFEST_PARSED,function() {
-                      video.play();
-                    });
-                  }
-                })();
-                $("#pageloader").hide();
+                        if (Hls.isSupported()) {
+                            var hls = new Hls();
+                            hls.loadSource(data.source);
+                            hls.attachMedia(video);
+                            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                                video.play();
+                            });
+                        }
+                    })();
+                    $("#pageloader").hide();
+                }
+            );
+        }
+
+        function changeSource(source) {
+            var video = document.querySelector('#player');
+
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(source);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
             }
-        );
-    }
-  </script>
+        }
+    </script>
 </body>
 
 </html>
