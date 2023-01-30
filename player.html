@@ -83,6 +83,14 @@
             }
         );
     }
+    
+    var playAndFullscreen = document.getElementsByClassName('play-and-fullscreen')[0];
+
+    playAndFullscreen.addEventListener('click', function(e) {
+      e.preventDefault();
+      player.play();
+      player.requestFullscreen();
+    }, false);
   </script>
 </body>
 
