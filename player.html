@@ -79,6 +79,7 @@
             function(data) {
                 $("#main").html(data);
                 var player = videojs('player');
+                player.playsinline: false;
                 $("#pageloader").hide();
             }
         );
