@@ -71,12 +71,10 @@
             return vars;
      }
     var video = getUrlVars()["video"];
-    var name = getUrlVars()["tvshow"];
     function getPlayer(){
       $.post("https://hadmal.com/wp-json/index.php", {
                 page: 'player',
-                key: video,
-                tvshow: name
+                key: video
             },
             function(data) {
                 $("#main").html(data);
