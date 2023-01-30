@@ -78,7 +78,15 @@
             },
             function(data) {
                 $("#main").html(data);
-                var player = videojs('player');
+                var player = videojs('player', {
+                  html5: {
+                    vhs: {
+                      overrideNative: true
+                    },
+                    nativeAudioTracks: false,
+                    nativeVideoTracks: false
+                  }
+                });
                 $("#pageloader").hide();
             }
         );
