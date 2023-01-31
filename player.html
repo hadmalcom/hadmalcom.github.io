@@ -96,7 +96,7 @@
                 function (data) {
                     $("#main").html(data.main);
                     (function () {
-                        var video = document.querySelector('#player');
+                        var video = document.querySelector('#hadmalPlayer');
 
                         if (Hls.isSupported()) {
                             var hls = new Hls();
@@ -114,7 +114,7 @@
 
         function changeSource(source,subtitle) {
             $("#video").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
-            var video = document.querySelector('#player');
+            var video = document.querySelector('#hadmalPlayer');
 
             if (Hls.isSupported()) {
                 var hls = new Hls();
