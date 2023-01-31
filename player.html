@@ -71,7 +71,7 @@
             function (data) {
                 $("#main").html(data.main);
                 (function () {
-                    var video = $("#hadmalPlayer");
+                    var video = document.querySelector('#hadmalPlayer');
                     if (Hls.isSupported()) {
                         var hls = new Hls();
                         hls.loadSource(data.source);
