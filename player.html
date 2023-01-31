@@ -113,7 +113,7 @@
         }
 
         function changeSource(source,subtitle) {
-            $("#video").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
+            $("#hadmalPlayer").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
             var video = document.querySelector('#hadmalPlayer');
 
             if (Hls.isSupported()) {
