@@ -71,25 +71,22 @@
             },
                 function (data) {
                     $("#main").html(data.main);
-                    (function () {
-                        var video = document.querySelector('#hadmalPlayer');
-
-                        if (Hls.isSupported()) {
+                    var video = $("#hadmalPlayer");
+                    if (Hls.isSupported()) {
                             var hls = new Hls();
                             hls.loadSource(data.source);
                             hls.attachMedia(video);
                             hls.on(Hls.Events.MANIFEST_PARSED, function () {
                                 video.play();
                             });
-                        }
-                    })();
+                    }
                     $("#pageloader").hide();
                 }
             );
         }
 
         function changeSource(source,subtitle) {
-            $("#hadmalPlayer").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
+            //$("#hadmalPlayer").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
             var video = document.querySelector('#hadmalPlayer');
 
             if (Hls.isSupported()) {
