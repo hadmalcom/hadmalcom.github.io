@@ -6,7 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HADMAL Player</title>
-    <link data-n-head="true" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Montserrat" />
+    <link data-n-head="true" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Montserrat" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="shortcut icon" href="res/img/faviconhdml.png" type="image/x-icon" />
@@ -63,28 +64,26 @@
             return vars;
         }
         var video = getUrlVars()["video"];
-        function getPlayer() {
-            $.post("https://hadmal.com/wp-json/index.php", {
-                page: 'player',
-                key: video
-            },
-                function (data) {
-                    $("#main").html(data.main);
-                    var video = $("#hadmalPlayer");
-                    if (Hls.isSupported()) {
-                            var hls = new Hls();
-                            hls.loadSource(data.source);
-                            hls.attachMedia(video);
-                            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                                video.pause();
-                            });
-                    }
-                    $("#pageloader").hide();
+        $.post("https://hadmal.com/wp-json/index.php", {
+            page: 'player',
+            key: video
+        },
+            function (data) {
+                $("#main").html(data.main);
+                var video = $("#hadmalPlayer");
+                if (Hls.isSupported()) {
+                    var hls = new Hls();
+                    hls.loadSource(data.source);
+                    hls.attachMedia(video);
+                    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                        video.pause();
+                    });
                 }
-            );
-        }
+                $("#pageloader").hide();
+            }
+        );
 
-        function changeSource(source,subtitle) {
+        function changeSource(source, subtitle) {
             //$("#hadmalPlayer").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
             var video = document.querySelector('#hadmalPlayer');
 
