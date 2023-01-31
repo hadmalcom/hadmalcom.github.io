@@ -70,15 +70,17 @@
         },
             function (data) {
                 $("#main").html(data.main);
-                var video = $("#hadmalPlayer");
-                if (Hls.isSupported()) {
-                    var hls = new Hls();
-                    hls.loadSource(data.source);
-                    hls.attachMedia(video);
-                    hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                        video.pause();
-                    });
-                }
+                (function () {
+                    var video = $("#hadmalPlayer");
+                    if (Hls.isSupported()) {
+                        var hls = new Hls();
+                        hls.loadSource(data.source);
+                        hls.attachMedia(video);
+                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                            video.pause();
+                        });
+                    }
+                })();
                 $("#pageloader").hide();
             }
         );
