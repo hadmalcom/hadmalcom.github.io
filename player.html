@@ -77,7 +77,7 @@
                         hls.loadSource(data.source);
                         hls.attachMedia(video);
                         hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                            video.pause();
+                            video.play();
                         });
                     }
                 })();
@@ -94,7 +94,7 @@
                 hls.loadSource(source);
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.pause();
+                    video.play();
                 });
             }
         }
