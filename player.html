@@ -97,7 +97,7 @@
             $("source").remove();
             $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
             if(subtitle != ''){
-                $("video").append('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
+                $("video").append('<track kind="subtitles" src="'+subtitle+'" default>');
             }
             if (Hls.isSupported()) {
                 var hls = new Hls();
