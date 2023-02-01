@@ -120,7 +120,6 @@
                 (function() {
                     var video = document.querySelector('#hadmalPlayer');
                     $("source").remove();
-                    $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
                     if(data.subtitle != undefined){
                         $("video").append('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
                     }
