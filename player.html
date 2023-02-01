@@ -121,7 +121,7 @@
                     var video = document.querySelector('#hadmalPlayer');
                     $("source").remove();
                     if(data.subtitle != undefined){
-                        $("video").append('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
+                        $("video").append(data.subtitle);
                     }
                     if (Hls.isSupported()) {
                         var hls = new Hls();
