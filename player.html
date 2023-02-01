@@ -94,6 +94,7 @@
         
         function changeSource(source, subtitle) {
             $("source").remove();
+            $("track").remove();
             $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
             if(subtitle != ''){
                 $("video").append('<track kind="subtitles" src="' + subtitle + '" default>');
@@ -118,6 +119,12 @@
             function (data) {
                 $("#main").html(data.main);
                 (function() {
+                    $("source").remove();
+                    $("track").remove();
+                    $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
+                    if(data.subtitle != ''){
+                        $("video").append('<track kind="subtitles" src="' + data.subtitle + '" default>');
+                    }
                     var video = document.querySelector('#hadmalPlayer');
                     if (Hls.isSupported()) {
                         var hls = new Hls();
