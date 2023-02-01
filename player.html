@@ -96,8 +96,8 @@
             var video = document.querySelector('#hadmalPlayer');
             $("source").remove();
             $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
-            if(subtitle != undefined || subtitle != ''){
-                $("video").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
+            if(subtitle != undefined || subtitle != '' || subtitle != "undefined"){
+                $("video").append('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
             }
             if (Hls.isSupported()) {
                 var hls = new Hls();
@@ -117,7 +117,22 @@
         },
             function (data) {
                 $("#main").html(data.main);
-                changeSource(data.source, data.subtitle);
+                (function() {
+                    var video = document.querySelector('#hadmalPlayer');
+                    $("source").remove();
+                    $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
+                    if(data.subtitle != undefined){
+                        $("video").append('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
+                    }
+                    if (Hls.isSupported()) {
+                        var hls = new Hls();
+                        hls.loadSource(source);
+                        hls.attachMedia(video);
+                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                            video.pause();
+                        });
+                    }
+                })();
                 $("#pageloader").hide();
             }
         );
