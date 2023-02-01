@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="shortcut icon" href="res/img/faviconhdml.png" type="image/x-icon" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         html,
         body {
@@ -78,7 +79,6 @@
         </div>
     </div>
     <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('goomaphy.com',5686554,document.createElement('script'))</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
     <script>
         function getUrlVars() {
@@ -93,23 +93,28 @@
         }
         
         function changeSource(source, subtitle) {
-            $("#hadmalPlayer").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
             var video = document.querySelector('#hadmalPlayer');
-
+            video.pause();
+            $("source").remove();
+            $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
+            if(subtitle != ''){
+                $("video").html('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
+            }
             if (Hls.isSupported()) {
                 var hls = new Hls();
                 hls.loadSource(source);
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.play();
+                    video.pause();
                 });
             }
         }
         
-        var video = getUrlVars()["video"];
+        var key = getUrlVars()["video"];
+        
         $.post("https://hadmal.com/wp-json/index.php", {
             page: 'player',
-            key: video
+            key: key
         },
             function (data) {
                 $("#main").html(data.main);
@@ -117,6 +122,7 @@
                 $("#pageloader").hide();
             }
         );
+        
     </script>
 </body>
 
