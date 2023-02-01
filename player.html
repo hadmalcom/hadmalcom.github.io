@@ -118,7 +118,6 @@
             function (data) {
                 $("#main").html(data.main);
                 (function() {
-                    $("source").remove();
                     var video = document.querySelector('#hadmalPlayer');
                     if (Hls.isSupported()) {
                         var hls = new Hls();
