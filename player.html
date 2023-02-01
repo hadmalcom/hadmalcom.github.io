@@ -96,7 +96,6 @@
             var video = document.querySelector('#hadmalPlayer');
             $("source").remove();
             $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
-            console.log(subtitle);
             if(subtitle != ''){
                 $("video").append('<track kind="subtitles" src="https://'+subtitle+'.srt.vtt" default>');
             }
