@@ -113,7 +113,7 @@
         },
             function (data) {
                 $("#main").html(data.main);
-                changeSource(data.source, "");
+                changeSource(data.source, data.subtitle);
                 $("#pageloader").hide();
             }
         );
