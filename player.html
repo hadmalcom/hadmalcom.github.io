@@ -96,7 +96,7 @@
             $("source").remove();
             $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
             if(subtitle != ''){
-                $("video").append('<track kind="subtitles" src="'+subtitle+'" default>');
+                $("video").append('<track kind="subtitles" src="' + subtitle + '" default>');
             }
             var video = document.querySelector('#hadmalPlayer');
             if (Hls.isSupported()) {
@@ -121,7 +121,7 @@
                     var video = document.querySelector('#hadmalPlayer');
                     if (Hls.isSupported()) {
                         var hls = new Hls();
-                        hls.loadSource(data.source);
+                        hls.loadSource(source);
                         hls.attachMedia(video);
                         hls.on(Hls.Events.MANIFEST_PARSED, function () {
                             video.pause();
