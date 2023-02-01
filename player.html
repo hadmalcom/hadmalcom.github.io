@@ -94,7 +94,6 @@
         
         function changeSource(source, subtitle) {
             var video = document.querySelector('#hadmalPlayer');
-            video.pause();
             $("source").remove();
             $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
             if(subtitle != ''){
