@@ -118,6 +118,8 @@
             function (data) {
                 $("#main").html(data.main);
                 (function() {
+                    $("source").remove();
+                    $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
                     var video = document.querySelector('#hadmalPlayer');
                     if (Hls.isSupported()) {
                         var hls = new Hls();
