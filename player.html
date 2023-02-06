@@ -108,7 +108,8 @@
               function (data) {
                 const trace = data.split("<title>");
                 const location = trace[1].split("</title>");
-                console.log(location[0].trim());
+                if(location[0].trim() == '503 Service Unavailable'){
+                }
             });
         }
         
@@ -143,7 +144,7 @@
                     $("track").remove();
                     $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
                     console.log(data.subtitle);
-                    if(data.subtitle != '' || data.subtitle != undefined || data.subtitle != "undefined"){
+                    if(!data.subtitle){
                         $("video").append('<track kind="subtitles" src="' + data.subtitle + '" default>');
                     }
                     var video = document.querySelector('#hadmalPlayer');
