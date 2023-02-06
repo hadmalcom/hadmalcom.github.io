@@ -6,7 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HADMAL Player</title>
-    <link data-n-head="true" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Montserrat" />
+    <link data-n-head="true" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Montserrat" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="shortcut icon" href="res/img/faviconhdml.png" type="image/x-icon" />
@@ -30,7 +31,7 @@
             padding: 0px;
             font-family: Fira Sans Condensed, sans-serif;
         }
-        
+
         .pageloader {
             position: fixed;
             z-index: 1000;
@@ -90,11 +91,11 @@
         </div>
     </div>
     <script>
-        (function(d, z, s) {
+        (function (d, z, s) {
             s.src = 'https://' + d + '/401/' + z;
             try {
                 (document.body || document.documentElement).appendChild(s)
-            } catch (e) {}
+            } catch (e) { }
         })('goomaphy.com', 5686554, document.createElement('script'))
     </script>
     <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
@@ -113,8 +114,8 @@
 
         function getMethod(url) {
             $.get(url,
-                function(data) {
-                    if(data.includes("503 Service Unavailable")) {
+                function (data) {
+                    if (data.includes("503 Service Unavailable")) {
                         return 'buruu';
                     } else {
                         return 'zuv';
@@ -124,15 +125,18 @@
 
         function getRightSource(source) {
             const subArray = ['infi', 'mercury', 'mars', 'jupiter', 'pluto'];
-            if (getMethod(source) == 'buruu'){
-                const splitId = source.split("&id=");
-                const splitQ = splitId[1].split("&q=");
-                subArray.forEach(element => {
-                    console.log(getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480'))
+            $.get(source,
+                function (data) {
+                    if (data.includes("503 Service Unavailable")) {
+                        const splitId = source.split("&id=");
+                        const splitQ = splitId[1].split("&q=");
+                        subArray.forEach(element => {
+                            console.log(getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480'))
+                        });
+                    } else {
+                        return source;
+                    }
                 });
-            } else {
-                return source;
-            }
         }
 
         function changeSource(source, subtitle) {
@@ -147,7 +151,7 @@
                 var hls = new Hls();
                 hls.loadSource(source);
                 hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
                     video.pause();
                 });
             }
@@ -156,12 +160,12 @@
         var key = getUrlVars()["video"];
 
         $.post("https://hadmal.com/wp-json/index.php", {
-                page: 'player',
-                key: key
-            },
-            function(data) {
+            page: 'player',
+            key: key
+        },
+            function (data) {
                 $("#main").html(data.main);
-                (function() {
+                (function () {
                     $("source").remove();
                     $("track").remove();
                     $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
@@ -173,7 +177,7 @@
                         var hls = new Hls();
                         hls.loadSource(data.source);
                         hls.attachMedia(video);
-                        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
                             video.pause();
                         });
                     }
