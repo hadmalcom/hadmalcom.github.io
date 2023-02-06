@@ -125,7 +125,7 @@
         function getRightSource(source) {
             const subArray = ['infi', 'mercury', 'mars', 'jupiter', 'pluto'];
             if (getMethod(source) == '0000'){
-                const splitId = result.split("&id=");
+                const splitId = source.split("&id=");
                 const splitQ = splitId[1].split("&q=");
                 subArray.forEach(element => {
                     console.log(getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480'))
