@@ -116,6 +116,8 @@
                 function(data) {
                     if(data.includes("503 Service Unavailable") == true) {
                         return '0000';
+                    } else {
+                        return '1111';
                     }
                 });
         }
