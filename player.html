@@ -124,7 +124,7 @@
             if (result.includes("503 Service Unavailable") == true) {
                 const splitId = result.split("&id=");
                 const splitQ = splitId[1].split("&q=");
-                numbers.forEach(element => {
+                subArray.forEach(element => {
                     console.log(getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480'))
                 });
             } else {
