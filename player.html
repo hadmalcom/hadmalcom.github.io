@@ -140,18 +140,17 @@
         }
 
         function getRightSource(source) {
-            const subArray = ['infi', 'mercury', 'mars', 'jupiter', 'pluto'];
+            const subArray = ['infi', 'mercury'];
             $.get(source,
                 function (data) {
                     if (data.includes("503 Service Unavailable")) {
-                        console.log(data);
                         const splitId = source.split("&id=");
                         const splitQ = splitId[1].split("&q=");
                         subArray.forEach(element => {
-                            console.log(getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480'))
+                            getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480')
                         });
                     } else {
-                        return source;
+                        changeSource(source, '');
                     }
                 });
         }
