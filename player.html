@@ -114,7 +114,7 @@
         function getMethod(url) {
             $.get(url,
                 function(data) {
-                    if(data.includes("503 Service Unavailable") == true) {
+                    if(data.includes("503 Service Unavailable")) {
                         return '0000';
                     } else {
                         return '1111';
