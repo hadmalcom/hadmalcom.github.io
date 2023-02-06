@@ -30,7 +30,7 @@
             padding: 0px;
             font-family: Fira Sans Condensed, sans-serif;
         }
-
+        
         .pageloader {
             position: fixed;
             z-index: 1000;
@@ -60,40 +60,48 @@
     </div>
     <div class="container w-100">
         <div class="row bg-secondary text-center p-0">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : 'ff58c07f59b842d88b7f0e3a3ae9b955',
-                        'format' : 'iframe',
-                        'height' : 60,
-                        'width' : 468,
-                        'params' : {}
-                    };
-                    document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.effectivecreativeformat.com/ff58c07f59b842d88b7f0e3a3ae9b955/invoke.js"></scr' + 'ipt>');
-                </script>
+            <script type="text/javascript">
+                atOptions = {
+                    'key': 'ff58c07f59b842d88b7f0e3a3ae9b955',
+                    'format': 'iframe',
+                    'height': 60,
+                    'width': 468,
+                    'params': {}
+                };
+                document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.effectivecreativeformat.com/ff58c07f59b842d88b7f0e3a3ae9b955/invoke.js"></scr' + 'ipt>');
+            </script>
         </div>
-     </div>
+    </div>
     <div id="main" class="container w-100">
 
     </div>
     <div class="container w-100">
         <div class="row bg-secondary text-center p-0">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : 'ff58c07f59b842d88b7f0e3a3ae9b955',
-                        'format' : 'iframe',
-                        'height' : 60,
-                        'width' : 468,
-                        'params' : {}
-                    };
-                    document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.effectivecreativeformat.com/ff58c07f59b842d88b7f0e3a3ae9b955/invoke.js"></scr' + 'ipt>');
-                </script>
+            <script type="text/javascript">
+                atOptions = {
+                    'key': 'ff58c07f59b842d88b7f0e3a3ae9b955',
+                    'format': 'iframe',
+                    'height': 60,
+                    'width': 468,
+                    'params': {}
+                };
+                document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.effectivecreativeformat.com/ff58c07f59b842d88b7f0e3a3ae9b955/invoke.js"></scr' + 'ipt>');
+            </script>
         </div>
     </div>
-    <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('goomaphy.com',5686554,document.createElement('script'))</script>
+    <script>
+        (function(d, z, s) {
+            s.src = 'https://' + d + '/401/' + z;
+            try {
+                (document.body || document.documentElement).appendChild(s)
+            } catch (e) {}
+        })('goomaphy.com', 5686554, document.createElement('script'))
+    </script>
     <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
     <script>
         function getUrlVars() {
-            var vars = [], hash;
+            var vars = [],
+                hash;
             var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
             for (var i = 0; i < hashes.length; i++) {
                 hash = hashes[i].split('=');
@@ -102,22 +110,33 @@
             }
             return vars;
         }
-        
-        function getRightSource(source){
-            $.get(source,
-              function (data) {
-                const trace = data.split("<title>");
-                const location = trace[1].split("</title>");
-                if(location[0].trim() == '503 Service Unavailable'){
-                }
-            });
+
+        function getMethod(url) {
+            $.get(url,
+                function(data) {
+                    return data;
+                });
         }
-        
+
+        function getRightSource(source) {
+            const subArray = ['infi', 'mercury', 'mars', 'jupiter', 'pluto'];
+            const result = getMethod(source);
+            if (result.includes("503 Service Unavailable") != true) {
+                return source;
+            } else {
+                const splitId = result.split("&id=");
+                const splitQ = splitId[1].split("&q=");
+                numbers.forEach(element => {
+                    console.log(getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480'))
+                });
+            }
+        }
+
         function changeSource(source, subtitle) {
             $("source").remove();
             $("track").remove();
             $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
-            if(subtitle != ''){
+            if (subtitle != '') {
                 $("video").append('<track kind="subtitles" src="' + subtitle + '" default>');
             }
             var video = document.querySelector('#hadmalPlayer');
@@ -125,26 +144,26 @@
                 var hls = new Hls();
                 hls.loadSource(source);
                 hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
                     video.pause();
                 });
             }
         }
-        
+
         var key = getUrlVars()["video"];
-        
+
         $.post("https://hadmal.com/wp-json/index.php", {
-            page: 'player',
-            key: key
-        },
-            function (data) {
+                page: 'player',
+                key: key
+            },
+            function(data) {
                 $("#main").html(data.main);
                 (function() {
                     $("source").remove();
                     $("track").remove();
                     $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
                     console.log(data.subtitle);
-                    if(!data.subtitle){
+                    if (!data.subtitle) {
                         $("video").append('<track kind="subtitles" src="' + data.subtitle + '" default>');
                     }
                     var video = document.querySelector('#hadmalPlayer');
@@ -152,7 +171,7 @@
                         var hls = new Hls();
                         hls.loadSource(data.source);
                         hls.attachMedia(video);
-                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                        hls.on(Hls.Events.MANIFEST_PARSED, function() {
                             video.pause();
                         });
                     }
@@ -160,7 +179,6 @@
                 $("#pageloader").hide();
             }
         );
-        
     </script>
 </body>
 
