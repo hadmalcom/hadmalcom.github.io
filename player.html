@@ -121,14 +121,14 @@
         function getRightSource(source) {
             const subArray = ['infi', 'mercury', 'mars', 'jupiter', 'pluto'];
             const result = getMethod(source);
-            if (result.includes("503 Service Unavailable") != true) {
-                return source;
-            } else {
+            if (result.includes("503 Service Unavailable") == true) {
                 const splitId = result.split("&id=");
                 const splitQ = splitId[1].split("&q=");
                 numbers.forEach(element => {
                     console.log(getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480'))
                 });
+            } else {
+                return source;
             }
         }
 
