@@ -163,7 +163,7 @@
                     $("track").remove();
                     $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
                     console.log(data.subtitle);
-                    if (!data.subtitle) {
+                    if (!data.subtitle || data.subitle != undefined) {
                         $("video").append('<track kind="subtitles" src="' + data.subtitle + '" default>');
                     }
                     var video = document.querySelector('#hadmalPlayer');
