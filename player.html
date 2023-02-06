@@ -128,6 +128,7 @@
             $.get(source,
                 function (data) {
                     if (data.includes("503 Service Unavailable")) {
+                        console.log(data);
                         const splitId = source.split("&id=");
                         const splitQ = splitId[1].split("&q=");
                         subArray.forEach(element => {
