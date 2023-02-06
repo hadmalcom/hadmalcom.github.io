@@ -114,14 +114,16 @@
         function getMethod(url) {
             $.get(url,
                 function(data) {
-                    return data;
+                    if(data.includes("503 Service Unavailable") == true) {
+                        return '0000';
+                    }
                 });
         }
 
         function getRightSource(source) {
             const subArray = ['infi', 'mercury', 'mars', 'jupiter', 'pluto'];
-            var result = getMethod(source);
-            if (result.includes("503 Service Unavailable") == true) {
+            var result = ;
+            if (getMethod(source) == '0000'){
                 const splitId = result.split("&id=");
                 const splitQ = splitId[1].split("&q=");
                 subArray.forEach(element => {
