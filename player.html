@@ -103,6 +103,15 @@
             return vars;
         }
         
+        function getRightSource(source){
+            $.get(source,
+              function (data) {
+                const trace = data.split("<title>");
+                const location = trace[1].split("</title>");
+                console.log(location[0].trim());
+            });
+        }
+        
         function changeSource(source, subtitle) {
             $("source").remove();
             $("track").remove();
