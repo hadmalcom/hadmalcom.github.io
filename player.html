@@ -129,31 +129,6 @@
                 });
             }
         }
-        
-        function getMethod(url) {
-            $.get(url,
-                function (data) {
-                    if (data.includes("#EXTM3U")) {
-                        changeSource(url, '');
-                    }
-                });
-        }
-
-        function getRightSource(source) {
-            const subArray = ['infi', 'mercury'];
-            $.get(source,
-                function (data) {
-                    if (data.includes("503 Service Unavailable")) {
-                        const splitId = source.split("&id=");
-                        const splitQ = splitId[1].split("&q=");
-                        subArray.forEach(element => {
-                            getMethod('https://hadmal.com/wp-player/chuck.php?sub=' + element + '&id=' + splitQ[0] + '&q=480')
-                        });
-                    } else {
-                        changeSource(source, '');
-                    }
-                });
-        }
 
         var key = getUrlVars()["video"];
 
@@ -166,7 +141,7 @@
                 (function () {
                     $("source").remove();
                     $("track").remove();
-                    getRightSource(data.source);
+                    $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
                     if (data.subtitle != null || data.subitle != undefined) {
                         $("video").append('<track kind="subtitles" src="' + data.subtitle + '" default>');
                     }
