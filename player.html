@@ -104,24 +104,6 @@
             return vars;
         }
 
-        function changeSource(source, subtitle) {
-            $("source").remove();
-            $("track").remove();
-            $("video").append('<source src="' + source + '" type="application/x-mpegURL">');
-            if (subtitle != '') {
-                $("video").append('<track kind="subtitles" src="' + subtitle + '" default>');
-            }
-            var video = document.querySelector('#hadmalPlayer');
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(source);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.pause();
-                });
-            }
-        }
-
         var key = getUrlVars()["video"];
 
         $.post("https://hadmal.com/wp-json/index.php", {
@@ -130,23 +112,6 @@
         },
             function (data) {
                 $("#main").html(data.main);
-                (function () {
-                    $("source").remove();
-                    $("track").remove();
-                    $("video").append('<source src="' + data.source + '" type="application/x-mpegURL">');
-                    if (data.subtitle != null || data.subitle != undefined) {
-                        $("video").append('<track kind="subtitles" src="' + data.subtitle + '" default>');
-                    }
-                    var video = document.querySelector('#hadmalPlayer');
-                    if (Hls.isSupported()) {
-                        var hls = new Hls();
-                        hls.loadSource(data.source);
-                        hls.attachMedia(video);
-                        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                            video.pause();
-                        });
-                    }
-                })();
                 $("#pageloader").hide();
             }
         );
